@@ -57,7 +57,7 @@
 #define __BB_GET_ACCESS(__base, __offset, __bit)\
                                        (*(uint32_t*)(PERIPH_BB_BASE + (__base + __offset) * 0x20 + (__bit * 0x04)))
 
-#define BB_GPIO_ODR(port, pin)         __BB_GET_ACCESS(CONCAT(GPIO, CONCAT(port, _BASE)), 0x10, pin)
+#define BB_GPIO_ODR(port, pin)         __BB_GET_ACCESS(CONCAT(GPIO, CONCAT(port, _BASE)), 0x14, pin)
 
 
 
