@@ -54,10 +54,12 @@
                                                                10,  9,  8,  7,  6,  5,  4,  3,  2, 1)
 
 
-#define __BB_GET_ACCESS(__base, __offset, __bit)\
-                                       (*(uint32_t*)(PERIPH_BB_BASE + (__base + __offset) * 0x20 + (__bit * 0x04)))
+#define BB_PERIPH(base, offset, bit)   (*(volatile uint32_t*)(PERIPH_BB_BASE + ((uint32_t)base + offset) * 32U + (bit * 4U)))
+#define BB_SRAM(addr, bit)             (*((volatile uint32_t*)(SRAM_BB_BASE + (((uint32_t)(addr) - SRAM_BASE) * 32U + (bit) * 4U))))
 
-#define BB_GPIO_ODR(port, pin)         __BB_GET_ACCESS(CONCAT(GPIO, CONCAT(port, _BASE)), 0x14, pin)
+
+#define BB_GPIO_ODR(port, pin)         BB_PERIPH(CONCAT(GPIO, CONCAT(port, _BASE)), 0x14, pin)
+
 
 
 
